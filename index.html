@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>欧阳文禹 · AIGC内容创作师 作品集</title>
+<style>
+  :root{
+    --bg:#0b0e14; --panel:#121826; --panel2:#161d2e; --line:#232c40;
+    --ink:#e8ecf4; --muted:#93a0b4; --dim:#5c6a80;
+    --a1:#7c5cff; --a2:#4ea1ff; --a3:#39d0c3;
+    --grad:linear-gradient(120deg,var(--a1),var(--a2));
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--bg); color:var(--ink);
+    font-family:"Microsoft YaHei","PingFang SC","Noto Sans SC",sans-serif;
+    line-height:1.7; overflow-x:hidden;
+  }
+  ::selection{background:rgba(124,92,255,.4)}
+  a{color:inherit;text-decoration:none}
+  img{display:block;max-width:100%}
+
+  /* ===== 导航 ===== */
+  nav{
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    background:rgba(11,14,20,.82); backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-in{max-width:1180px;margin:0 auto;padding:0 24px;height:60px;display:flex;align-items:center;gap:28px}
+  .logo{font-weight:800;font-size:17px;letter-spacing:1px;white-space:nowrap}
+  .logo em{font-style:normal;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .nav-links{display:flex;gap:4px;margin-left:auto;overflow-x:auto;scrollbar-width:none}
+  .nav-links::-webkit-scrollbar{display:none}
+  .nav-links a{font-size:13.5px;color:var(--muted);padding:6px 12px;border-radius:8px;white-space:nowrap;transition:.2s}
+  .nav-links a:hover{color:var(--ink);background:rgba(124,92,255,.14)}
+
+  /* ===== Hero ===== */
+  header{
+    position:relative; padding:150px 24px 90px; overflow:hidden;
+    background:
+      radial-gradient(700px 340px at 18% 8%, rgba(124,92,255,.16), transparent 60%),
+      radial-gradient(700px 340px at 85% 20%, rgba(78,161,255,.13), transparent 60%);
+  }
+  header::before{
+    content:""; position:absolute; inset:0;
+    background-image:linear-gradient(rgba(147,160,180,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(147,160,180,.05) 1px,transparent 1px);
+    background-size:44px 44px;
+    mask-image:radial-gradient(80% 70% at 50% 30%,#000 30%,transparent 100%);
+  }
+  .hero-in{max-width:1180px;margin:0 auto;position:relative}
+  .hero-tag{
+    display:inline-flex;align-items:center;gap:8px;font-size:12.5px;letter-spacing:2px;
+    color:var(--a2);border:1px solid rgba(78,161,255,.35);border-radius:999px;padding:5px 14px;margin-bottom:22px;
+    background:rgba(78,161,255,.08);
+  }
+  .hero-tag i{width:6px;height:6px;border-radius:50%;background:var(--a3);box-shadow:0 0 10px var(--a3)}
+  h1{font-size:clamp(34px,5.4vw,56px);font-weight:800;letter-spacing:2px;line-height:1.2}
+  h1 span{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .hero-sub{margin:16px 0 8px;font-size:16px;color:var(--muted);max-width:720px}
+  .hero-sub b{color:var(--ink)}
+  .stats{display:flex;flex-wrap:wrap;gap:12px;margin-top:34px}
+  .stat{
+    background:var(--panel);border:1px solid var(--line);border-radius:14px;
+    padding:14px 22px;min-width:128px;transition:.25s;
+  }
+  .stat:hover{transform:translateY(-3px);border-color:rgba(124,92,255,.5)}
+  .stat b{display:block;font-size:24px;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .stat span{font-size:12.5px;color:var(--muted)}
+  .hero-contact{margin-top:30px;display:flex;flex-wrap:wrap;gap:14px;font-size:13.5px;color:var(--muted)}
+  .hero-contact span{border:1px solid var(--line);border-radius:10px;padding:7px 14px;background:rgba(18,24,38,.6)}
+
+  /* ===== 通用区块 ===== */
+  section{max-width:1180px;margin:0 auto;padding:70px 24px 10px}
+  .sec-head{display:flex;align-items:baseline;gap:16px;margin-bottom:8px;flex-wrap:wrap}
+  .sec-no{
+    font-size:13px;font-weight:800;letter-spacing:2px;color:transparent;
+    background:var(--grad);-webkit-background-clip:text;background-clip:text;
+  }
+  h2{font-size:clamp(24px,3.2vw,32px);font-weight:800;letter-spacing:1px}
+  .sec-head::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(--line),transparent);min-width:60px}
+  .sec-desc{color:var(--muted);font-size:14.5px;margin-bottom:26px;max-width:860px}
+  .tags{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 26px}
+  .tag{font-size:12.5px;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:5px 14px;background:var(--panel)}
+  .tag.role{color:#c9b8ff;border-color:rgba(124,92,255,.45);background:rgba(124,92,255,.1)}
+  .tag.tool{color:#9ed3ff;border-color:rgba(78,161,255,.4);background:rgba(78,161,255,.08)}
+  .tag.note{color:#8fe6dd;border-color:rgba(57,208,195,.4);background:rgba(57,208,195,.08)}
+
+  h3{font-size:17px;font-weight:700;margin:34px 0 16px;display:flex;align-items:center;gap:10px}
+  h3::before{content:"";width:4px;height:16px;border-radius:2px;background:var(--grad)}
+  h3 small{font-size:12px;color:var(--dim);font-weight:400}
+
+  /* ===== 视频作品 ===== */
+  .bili-feature{
+    border:1px solid var(--line);border-radius:16px;overflow:hidden;background:var(--panel);
+  }
+  .bili-frame{aspect-ratio:16/9;background:#000}
+  .bili-frame iframe{width:100%;height:100%;border:0;display:block}
+  .bili-info{display:flex;align-items:center;gap:16px;padding:16px 20px;flex-wrap:wrap}
+  .bili-info b{font-size:16px}
+  .bili-info p{font-size:12.5px;color:var(--muted);flex:1;min-width:220px}
+  .bili-info a{
+    font-size:13px;color:#fff;background:var(--grad);border-radius:9px;padding:8px 18px;
+    white-space:nowrap;transition:.2s;box-shadow:0 4px 18px rgba(124,92,255,.35);
+  }
+  .bili-info a:hover{transform:translateY(-2px)}
+
+  /* ===== 画廊 ===== */
+  .grid{display:grid;gap:14px}
+  .g-chars{grid-template-columns:repeat(auto-fill,minmax(230px,1fr))}
+  .g-scenes{grid-template-columns:repeat(auto-fill,minmax(300px,1fr))}
+  .g-work{grid-template-columns:repeat(auto-fill,minmax(340px,1fr))}
+  .g-assets{grid-template-columns:repeat(auto-fill,minmax(280px,1fr))}
+  .g-draw{grid-template-columns:repeat(auto-fill,minmax(260px,1fr))}
+  figure{position:relative;border-radius:14px;overflow:hidden;border:1px solid var(--line);background:var(--panel);cursor:zoom-in}
+  figure img{width:100%;height:100%;object-fit:cover;transition:transform .45s ease}
+  .g-chars figure{aspect-ratio:1/1}
+  .g-scenes figure,.g-assets figure{aspect-ratio:4/3}
+  .g-work figure{aspect-ratio:16/10}
+  .g-draw figure{aspect-ratio:3/4}
+  figure:hover img{transform:scale(1.05)}
+  figure figcaption{
+    position:absolute;left:0;right:0;bottom:0;padding:26px 12px 10px;
+    font-size:12.5px;color:#dfe6f2;
+    background:linear-gradient(transparent,rgba(5,8,14,.88));
+    transform:translateY(6px);opacity:0;transition:.3s;
+  }
+  figure:hover figcaption{transform:none;opacity:1}
+
+  /* ===== 流程 ===== */
+  .pipe{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;position:relative}
+  .pipe-step{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px;position:relative;transition:.25s}
+  .pipe-step:hover{transform:translateY(-4px);border-color:rgba(124,92,255,.5)}
+  .pipe-step .no{
+    width:30px;height:30px;border-radius:9px;display:grid;place-items:center;
+    font-size:13px;font-weight:800;color:#fff;background:var(--grad);margin-bottom:12px;
+  }
+  .pipe-step b{font-size:15px;display:block;margin-bottom:6px}
+  .pipe-step p{font-size:12.5px;color:var(--muted);margin-bottom:12px;min-height:56px}
+  .pipe-step figure{aspect-ratio:16/10;margin:0}
+  .pipe-arrow{
+    position:absolute;top:50%;right:-13px;z-index:2;color:var(--a2);font-size:16px;font-weight:800;
+    text-shadow:0 0 12px rgba(78,161,255,.8);
+  }
+
+  /* ===== 其他 ===== */
+  .other-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .other-card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px}
+  .other-card b{font-size:15px;display:block;margin-bottom:6px}
+  .other-card p{font-size:12.5px;color:var(--muted)}
+  .placeholder-card{
+    display:flex;align-items:center;gap:16px;border:1px dashed rgba(78,161,255,.4);
+    background:rgba(78,161,255,.05);border-radius:14px;padding:18px 22px;
+  }
+  .placeholder-card .play{
+    flex:none;width:48px;height:48px;border-radius:50%;display:grid;place-items:center;
+    background:var(--grad);opacity:.85;
+  }
+  .placeholder-card .play svg{width:18px;height:18px;fill:#fff;margin-left:3px}
+  .placeholder-card b{font-size:15px;display:block}
+  .placeholder-card p{font-size:12.5px;color:var(--muted)}
+  .placeholder-card.clickable{cursor:pointer;transition:.2s}
+  .placeholder-card.clickable:hover{background:rgba(78,161,255,.12);border-color:rgba(78,161,255,.7)}
+  .link-card{display:block;transition:.2s}
+  .link-card:hover{border-color:rgba(124,92,255,.6);transform:translateY(-2px)}
+
+  footer{margin-top:80px;border-top:1px solid var(--line);padding:44px 24px 54px;text-align:center}
+  footer .f-name{font-size:18px;font-weight:800;letter-spacing:1px}
+  footer .f-name span{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  footer p{color:var(--muted);font-size:13px;margin-top:8px}
+
+  /* ===== 灯箱 ===== */
+  .lightbox{
+    position:fixed;inset:0;z-index:200;background:rgba(5,8,14,.92);backdrop-filter:blur(6px);
+    display:none;align-items:center;justify-content:center;flex-direction:column;padding:30px;
+  }
+  .lightbox.on{display:flex}
+  .lightbox img{max-width:min(1200px,92vw);max-height:80vh;border-radius:10px;box-shadow:0 20px 80px rgba(0,0,0,.6)}
+  .lb-cap{margin-top:14px;color:var(--muted);font-size:13.5px}
+  .lb-btn{
+    position:absolute;top:50%;transform:translateY(-50%);width:46px;height:46px;border-radius:50%;
+    border:1px solid var(--line);background:rgba(18,24,38,.8);color:var(--ink);font-size:20px;cursor:pointer;transition:.2s;
+  }
+  .lb-btn:hover{background:var(--a1)}
+  .lb-prev{left:22px}.lb-next{right:22px}
+  .lb-close{position:absolute;top:20px;right:24px;width:42px;height:42px;border-radius:50%;border:1px solid var(--line);background:rgba(18,24,38,.8);color:var(--ink);font-size:18px;cursor:pointer;z-index:5}
+
+  /* ===== 视频弹窗 ===== */
+  .vmodal{position:fixed;inset:0;z-index:210;background:rgba(5,8,14,.94);display:none;align-items:center;justify-content:center;padding:30px}
+  .vmodal.on{display:flex}
+  .vmodal .box{background:#000;border-radius:12px;overflow:hidden;position:relative}
+  .vmodal .box.portrait{height:min(86vh,900px);aspect-ratio:9/16}
+  .vmodal .box.landscape{width:min(1000px,94vw);aspect-ratio:16/9}
+  .vmodal video,.vmodal iframe{width:100%;height:100%;border:0;display:block}
+  .vmodal .lb-close{top:20px;right:24px}
+
+  @media (max-width:900px){
+    .video-grid{grid-template-columns:1fr;max-width:400px;margin:0 auto}
+    .pipe{grid-template-columns:1fr 1fr}
+    .pipe-arrow{display:none}
+    .other-grid{grid-template-columns:1fr}
+  }
+  @media (max-width:560px){
+    .pipe{grid-template-columns:1fr}
+    .nav-in{gap:14px}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-in">
+    <div class="logo">欧阳文禹 <em>· PORTFOLIO</em></div>
+    <div class="nav-links">
+      <a href="#videos">视频作品</a>
+      <a href="#p1">一日破五境</a>
+      <a href="#p2">九恶妃</a>
+      <a href="#p3">神徒游戏</a>
+      <a href="#pipe">制作流程</a>
+      <a href="#comfyui">ComfyUI</a>
+      <a href="#other">其他</a>
+    </div>
+  </div>
+</nav>
+
+<header>
+  <div class="hero-in">
+    <div class="hero-tag"><i></i>AIGC CONTENT CREATOR</div>
+    <h1>欧阳文禹 <span>· AIGC内容创作师</span></h1>
+    <p class="hero-sub">专注 <b>AI 漫剧 / 短剧全流程制作</b>：角色与场景资产生成、分镜提示词、AI 视频生成与剪辑输出。用工具把创意落地为可交付的内容。</p>
+    <div class="stats">
+      <div class="stat"><b>150+</b><span>生成角色四视图</span></div>
+      <div class="stat"><b>50+</b><span>实际确认第一版角色</span></div>
+      <div class="stat"><b>3</b><span>参与制作项目</span></div>
+    </div>
+    <div class="hero-contact">
+      <span>📱 18879636297</span>
+      <span>✉️ 3338018782@qq.com</span>
+      <span>🎓 江西财经大学 · 软件工程</span>
+    </div>
+  </div>
+</header>
+
+<!-- ============ 视频作品（置顶） ============ -->
+<section id="videos">
+  <div class="sec-head"><span class="sec-no">SHOWREEL</span><h2>视频作品</h2></div>
+  <p class="sec-desc">项目实际产出的 AI 视频成片合集，由分镜提示词驱动生成并经剪辑组接，竖屏 9:16 短剧规格。已上线 B站，下方可直接播放。</p>
+  <div class="bili-feature">
+    <div class="bili-frame">
+      <iframe src="https://player.bilibili.com/player.html?bvid=BV11mam6tEZg&autoplay=0&high_quality=1&danmaku=0" allowfullscreen scrolling="no" frameborder="0"></iframe>
+    </div>
+    <div class="bili-info">
+      <b>【AI漫剧项目作品展示】</b>
+      <p>《一日破五境》《九恶妃》项目视频合集 · 资产 / 分镜提示词 / 视频生成 / 剪辑全流程产出</p>
+      <a href="https://www.bilibili.com/video/BV11mam6tEZg" target="_blank" rel="noopener">在 B站 观看 ↗</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 项目一 ============ -->
+<section id="p1">
+  <div class="sec-head"><span class="sec-no">PROJECT 01</span><h2>一日破五境</h2></div>
+  <p class="sec-desc">AI 剧目《一日破五境》。本人全程参与并制作，覆盖资产生成、分镜提示词、视频生成到剪辑输出的完整链路，并主要负责角色资产板块。</p>
+  <div class="tags">
+    <span class="tag role">角色：全程参与并制作 · 角色资产主要负责人</span>
+    <span class="tag tool">漫剧创作工具</span>
+    <span class="tag tool">即梦</span>
+    <span class="tag note">确认第一版角色 50+</span>
+    <span class="tag note">生成角色四视图 150+</span>
+  </div>
+
+  <h3>角色资产 <small>四视图 · 部分展示（14 组）</small></h3>
+  <div class="grid g-chars">
+    <figure><img src="assets/images/p1_char_01.jpg" alt="余大人-东寺" loading="lazy"><figcaption>余大人 · 东寺</figcaption></figure>
+    <figure><img src="assets/images/p1_char_02.jpg" alt="捉刀人群体-广场执仪官服" loading="lazy"><figcaption>捉刀人群体 · 广场执仪官服</figcaption></figure>
+    <figure><img src="assets/images/p1_char_03.jpg" alt="沈池-当铺恶少常服" loading="lazy"><figcaption>沈池 · 当铺恶少常服</figcaption></figure>
+    <figure><img src="assets/images/p1_char_04.jpg" alt="解捉刀-橙色飞鱼服考官形象" loading="lazy"><figcaption>解捉刀 · 橙色飞鱼服考官形象</figcaption></figure>
+    <figure><img src="assets/images/p1_char_05.jpg" alt="诸雨霆-书院黑马学子形象" loading="lazy"><figcaption>诸雨霆 · 书院黑马学子形象</figcaption></figure>
+    <figure><img src="assets/images/p1_char_06.jpg" alt="赵耀-书院天骄锦袍形象" loading="lazy"><figcaption>赵耀 · 书院天骄锦袍形象</figcaption></figure>
+    <figure><img src="assets/images/p1_char_07.jpg" alt="赵耀-擂台战斗装" loading="lazy"><figcaption>赵耀 · 擂台战斗装</figcaption></figure>
+    <figure><img src="assets/images/p1_char_08.jpg" alt="轩辕琴音-宫廷正装" loading="lazy"><figcaption>轩辕琴音 · 宫廷正装</figcaption></figure>
+    <figure><img src="assets/images/p1_char_09.jpg" alt="庄威" loading="lazy"><figcaption>庄威</figcaption></figure>
+    <figure><img src="assets/images/p1_char_10.jpg" alt="申德阳-邪道儒修" loading="lazy"><figcaption>申德阳 · 邪道儒修</figcaption></figure>
+    <figure><img src="assets/images/p1_char_11.jpg" alt="美妇-走火入魔血裙形象" loading="lazy"><figcaption>美妇 · 走火入魔血裙形象</figcaption></figure>
+    <figure><img src="assets/images/p1_char_12.jpg" alt="赵县长-县丞官袍形象" loading="lazy"><figcaption>赵县长 · 县丞官袍形象</figcaption></figure>
+    <figure><img src="assets/images/p1_char_13.jpg" alt="魏相思" loading="lazy"><figcaption>魏相思</figcaption></figure>
+    <figure><img src="assets/images/p1_char_14.jpg" alt="黑市麻脸掌柜-黑市常服" loading="lazy"><figcaption>黑市麻脸掌柜 · 黑市常服</figcaption></figure>
+  </div>
+
+  <h3>场景资产 <small>多视角 + 空间结构</small></h3>
+  <div class="grid g-scenes">
+    <figure><img src="assets/images/p1_scene_01.jpg" alt="楚尾郡比武场-正面视角" loading="lazy"><figcaption>楚尾郡比武场 · 正面视角</figcaption></figure>
+    <figure><img src="assets/images/p1_scene_02.jpg" alt="楚尾郡比武场-反面视角" loading="lazy"><figcaption>楚尾郡比武场 · 反面视角</figcaption></figure>
+    <figure><img src="assets/images/p1_scene_03.jpg" alt="石阳书院广场-正面视角" loading="lazy"><figcaption>石阳书院广场 · 正面视角</figcaption></figure>
+    <figure><img src="assets/images/p1_scene_04.jpg" alt="石阳书院广场-反面视角" loading="lazy"><figcaption>石阳书院广场 · 反面视角</figcaption></figure>
+    <figure><img src="assets/images/p1_scene_05.jpg" alt="石阳书院广场-空间结构图" loading="lazy"><figcaption>石阳书院广场 · 空间结构图</figcaption></figure>
+  </div>
+</section>
+
+<!-- ============ 项目二 ============ -->
+<section id="p2">
+  <div class="sec-head"><span class="sec-no">PROJECT 02</span><h2>九恶妃</h2></div>
+  <p class="sec-desc">AI 剧目《九恶妃》。本人主要负责视频分镜提示词的输出与视频生成、调整。参与时前 30 集资产已基本完善，以下展示为本人所补充的资产。</p>
+  <div class="tags">
+    <span class="tag role">角色：分镜提示词输出 · 视频生成与调整</span>
+    <span class="tag tool">漫剧创作工具</span>
+    <span class="tag tool">即梦</span>
+    <span class="tag tool">ChatGPT（补充资产主要工具）</span>
+  </div>
+
+  <h3>补充角色资产</h3>
+  <div class="grid g-chars">
+    <figure><img src="assets/images/p2_char_01.jpg" alt="云祖之魂-正面全身视图" loading="lazy"><figcaption>云祖之魂 · 正面全身视图</figcaption></figure>
+    <figure><img src="assets/images/p2_char_02.jpg" alt="福禄-青袍老太监形象" loading="lazy"><figcaption>福禄 · 青袍老太监形象</figcaption></figure>
+    <figure><img src="assets/images/p2_char_03.jpg" alt="唐梦辰-宫廷正装" loading="lazy"><figcaption>唐梦辰 · 宫廷正装</figcaption></figure>
+    <figure><img src="assets/images/p2_char_04.jpg" alt="木玄雅-丹妃蓝色宫装" loading="lazy"><figcaption>木玄雅 · 丹妃蓝色宫装</figcaption></figure>
+  </div>
+
+  <h3>补充场景资产</h3>
+  <div class="grid g-scenes">
+    <figure><img src="assets/images/p2_scene_01.jpg" alt="九重云阙台-正面视角" loading="lazy"><figcaption>九重云阙台 · 正面视角</figcaption></figure>
+    <figure><img src="assets/images/p2_scene_02.jpg" alt="九重云阙台-反面视角" loading="lazy"><figcaption>九重云阙台 · 反面视角</figcaption></figure>
+    <figure><img src="assets/images/p2_scene_03.jpg" alt="月妃寝宫-正面视角" loading="lazy"><figcaption>月妃寝宫 · 正面视角</figcaption></figure>
+    <figure><img src="assets/images/p2_scene_04.jpg" alt="月妃寝宫-反面视角" loading="lazy"><figcaption>月妃寝宫 · 反面视角</figcaption></figure>
+  </div>
+</section>
+
+<!-- ============ 项目三 ============ -->
+<section id="p3">
+  <div class="sec-head"><span class="sec-no">PROJECT 03</span><h2>神徒游戏</h2></div>
+  <p class="sec-desc">项目《神徒游戏》。本人参与场景生成板块，产出多视角场景与空间结构资产，服务于镜头调度与画面一致性。</p>
+  <div class="tags">
+    <span class="tag role">角色：场景生成</span>
+  </div>
+  <h3>场景资产</h3>
+  <div class="grid g-assets">
+    <figure><img src="assets/images/p3_asset_01.jpg" alt="押运车-外观" loading="lazy"><figcaption>押运车 · 外观</figcaption></figure>
+    <figure><img src="assets/images/p3_asset_02.jpg" alt="押运车-正面视角" loading="lazy"><figcaption>押运车 · 正面视角</figcaption></figure>
+    <figure><img src="assets/images/p3_asset_03.jpg" alt="押运车-反面视角" loading="lazy"><figcaption>押运车 · 反面视角</figcaption></figure>
+    <figure><img src="assets/images/p3_asset_04.jpg" alt="押运车-空间结构" loading="lazy"><figcaption>押运车 · 空间结构</figcaption></figure>
+    <figure><img src="assets/images/p3_asset_05.jpg" alt="青山精神病院-302病房-白天正" loading="lazy"><figcaption>青山精神病院 302 病房 · 白天正面</figcaption></figure>
+    <figure><img src="assets/images/p3_asset_06.jpg" alt="青山精神病院-302病房-白天反" loading="lazy"><figcaption>青山精神病院 302 病房 · 白天反面</figcaption></figure>
+  </div>
+</section>
+
+<!-- ============ 制作流程 ============ -->
+<section id="pipe">
+  <div class="sec-head"><span class="sec-no">WORKFLOW</span><h2>实际生产时的工作痕迹</h2></div>
+  <p class="sec-desc">真实项目中的生产链路：由生成资产图片 → 生成镜头提示词 → 提示词生成视频 → 视频粗剪，环环相扣、可复用、可交付。</p>
+  <div class="pipe">
+    <div class="pipe-step">
+      <div class="no">1</div><b>生成资产图片</b>
+      <p>基于角色/场景设定生成四视图与多视角场景资产，确认入库。</p>
+      <figure><img src="assets/images/p1_work_02.jpg" alt="人物资产截图" loading="lazy"><figcaption>角色资产生产截图</figcaption></figure>
+      <span class="pipe-arrow">→</span>
+    </div>
+    <div class="pipe-step">
+      <div class="no">2</div><b>生成镜头提示词</b>
+      <p>结合资产与剧情输出分镜提示词，把控景别、运镜与画面风格。</p>
+      <figure><img src="assets/images/p1_work_01.jpg" alt="人物提示词生成" loading="lazy"><figcaption>提示词生成工作截图</figcaption></figure>
+      <span class="pipe-arrow">→</span>
+    </div>
+    <div class="pipe-step">
+      <div class="no">3</div><b>提示词生成视频</b>
+      <p>资产 + 提示词输入生成工作流，产出视频镜头并反复调整。</p>
+      <figure><img src="assets/images/p2_work_02.jpg" alt="视频生成" loading="lazy"><figcaption>视频生成工作截图</figcaption></figure>
+      <span class="pipe-arrow">→</span>
+    </div>
+    <div class="pipe-step">
+      <div class="no">4</div><b>视频粗剪</b>
+      <p>对生成镜头进行粗剪组接，输出可供审片与精剪的版本。</p>
+      <figure><img src="assets/images/p2_work_01.jpg" alt="工作流资产输入" loading="lazy"><figcaption>工作流资产输入截图</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ComfyUI ============ -->
+<section id="comfyui">
+  <div class="sec-head"><span class="sec-no">COMFYUI</span><h2>ComfyUI 工作流</h2></div>
+  <p class="sec-desc">以学习参考为目的进行了解与搭建实践，熟悉节点组合思路（高清放大、ControlNet 等），为生产效率提升做技术储备。</p>
+  <div class="grid g-work">
+    <figure><img src="assets/images/comfyui_01.jpg" alt="ComfyUI 工作流截图 1" loading="lazy"><figcaption>ComfyUI 工作流 · 学习搭建 1</figcaption></figure>
+    <figure><img src="assets/images/comfyui_02.jpg" alt="ComfyUI 工作流截图 2" loading="lazy"><figcaption>ComfyUI 工作流 · 学习搭建 2</figcaption></figure>
+    <figure><img src="assets/images/comfyui_03.jpg" alt="ComfyUI 工作流截图 3" loading="lazy"><figcaption>ComfyUI 工作流 · 学习搭建 3</figcaption></figure>
+  </div>
+</section>
+
+<!-- ============ 其他 ============ -->
+<section id="other">
+  <div class="sec-head"><span class="sec-no">MORE</span><h2>其他</h2></div>
+  <p class="sec-desc">美术基础与内容平台运营：板绘临摹训练审美与造型能力，小红书与剪辑作品持续输出中。</p>
+
+  <h3>绘画 · 板绘基础</h3>
+  <div class="grid g-draw">
+    <figure><img src="assets/images/draw_01.jpg" alt="明日香板绘临摹" loading="lazy"><figcaption>板绘临摹 · 明日香</figcaption></figure>
+    <figure><img src="assets/images/draw_02.jpg" alt="saber板绘临摹" loading="lazy"><figcaption>板绘临摹 · Saber</figcaption></figure>
+  </div>
+
+  <h3>内容平台与剪辑</h3>
+  <div class="other-grid">
+    <a class="other-card link-card" href="https://www.xiaohongshu.com/user/profile/648e5bb50000000012035418" target="_blank" rel="noopener">
+      <b>小红书 · 临摹绘画</b>
+      <p>小红书号：Hans483235769 · 板绘临摹与绘画作品持续更新，点击查看主页 ↗</p>
+    </a>
+    <div class="placeholder-card clickable" data-video="edit">
+      <div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+      <div><b>剪辑视频作品</b><p>AMV / 口播 / 推广视频 · 已上线 B站，点击播放</p></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="f-name">欧阳文禹 <span>· AIGC内容创作师</span></div>
+  <p>18879636297 ｜ 3338018782@qq.com ｜ 期待与您在 AIGC 领域同行</p>
+</footer>
+
+<!-- 灯箱 -->
+<div class="lightbox" id="lightbox">
+  <button class="lb-close" id="lbClose">✕</button>
+  <button class="lb-btn lb-prev" id="lbPrev">‹</button>
+  <img id="lbImg" src="" alt="">
+  <div class="lb-cap" id="lbCap"></div>
+  <button class="lb-btn lb-next" id="lbNext">›</button>
+</div>
+
+<!-- 视频弹窗 -->
+<div class="vmodal" id="vmodal">
+  <div class="box portrait" id="vbox"></div>
+  <button class="lb-close" id="vClose">✕</button>
+</div>
+
+<script>
+/* ============================================================
+   视频配置：填入 B站播放页链接即自动转为嵌入式播放器。
+============================================================ */
+const VIDEOS = {
+  edit: { src:"", bili:"https://www.bilibili.com/video/BV1Aybe6GE5X" },
+};
+
+function bilibiliEmbed(url){
+  const m = url.match(/BV[\w]+/);
+  return m ? "https://player.bilibili.com/player.html?bvid=" + m[0] + "&autoplay=1&high_quality=1" : null;
+}
+
+const vmodal = document.getElementById("vmodal");
+const vbox = document.getElementById("vbox");
+function openVideo(key){
+  const v = VIDEOS[key];
+  if(!v) return;
+  const emb = v.bili ? bilibiliEmbed(v.bili) : null;
+  if(emb){
+    vbox.className = "box landscape";
+    vbox.innerHTML = '<iframe src="'+emb+'" allowfullscreen scrolling="no"></iframe>';
+  } else if(v.src){
+    vbox.className = "box portrait";
+    vbox.innerHTML = '<video src="'+v.src+'" controls autoplay playsinline></video>';
+  } else {
+    return;
+  }
+  vmodal.classList.add("on");
+}
+document.querySelectorAll("[data-video]").forEach(c=>{
+  c.addEventListener("click", ()=> openVideo(c.dataset.video));
+});
+function closeVideo(){
+  vmodal.classList.remove("on");
+  vbox.innerHTML = "";
+}
+document.getElementById("vClose").addEventListener("click", closeVideo);
+vmodal.addEventListener("click", e=>{ if(e.target === vmodal) closeVideo(); });
+
+/* ---------- 灯箱 ---------- */
+const figs = Array.from(document.querySelectorAll("figure img"));
+let lbIndex = 0;
+const lb = document.getElementById("lightbox");
+const lbImg = document.getElementById("lbImg");
+const lbCap = document.getElementById("lbCap");
+function showLb(i){
+  lbIndex = (i + figs.length) % figs.length;
+  lbImg.src = figs[lbIndex].src;
+  lbCap.textContent = figs[lbIndex].alt;
+}
+figs.forEach((img,i)=> img.parentElement.addEventListener("click", ()=>{ showLb(i); lb.classList.add("on"); }));
+document.getElementById("lbPrev").addEventListener("click", e=>{ e.stopPropagation(); showLb(lbIndex-1); });
+document.getElementById("lbNext").addEventListener("click", e=>{ e.stopPropagation(); showLb(lbIndex+1); });
+document.getElementById("lbClose").addEventListener("click", ()=> lb.classList.remove("on"));
+lb.addEventListener("click", e=>{ if(e.target === lb) lb.classList.remove("on"); });
+document.addEventListener("keydown", e=>{
+  if(vmodal.classList.contains("on") && e.key === "Escape"){ closeVideo(); return; }
+  if(!lb.classList.contains("on")) return;
+  if(e.key === "Escape") lb.classList.remove("on");
+  if(e.key === "ArrowLeft") showLb(lbIndex-1);
+  if(e.key === "ArrowRight") showLb(lbIndex+1);
+});
+</script>
+</body>
+</html>
